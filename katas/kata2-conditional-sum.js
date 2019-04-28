@@ -2,13 +2,25 @@ const conditionalSum = function (values, condition) {
     let sum = 0;
 
     if (condition == "even"){
-        for (var i = 0; i < values.length; i++){
+        return evenSum(values);
+    } else if (condition == "odd") {
+        return oddSum(values);
+    }
+
+    //takes and array and returns the sum of all even numbers
+    function evenSum(values){
+        var sum = 0;
+        for (var i = 0; i < values.length; i++) {
             if (values[i] % 2 == 0) {
                 sum += values[i];
             }
-        }
-        return sum;
-    } else if (condition == "odd") {
+        } 
+        return sum;  
+    }
+
+    //takes and array and returns the sum of all odd numbers
+    function oddSum(values){
+        var sum = 0;
         for (var i = 0; i < values.length; i++) {
             if (values[i] % 2 == 1) {
                 sum += values[i];
@@ -17,6 +29,8 @@ const conditionalSum = function (values, condition) {
         return sum;
     }
 };
+
+
 
 console.log(conditionalSum([1, 2, 3, 4, 5], "even")); // => 6
 console.log(conditionalSum([1, 2, 3, 4, 5], "odd"));  // => 9
