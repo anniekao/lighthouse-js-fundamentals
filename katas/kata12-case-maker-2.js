@@ -1,5 +1,5 @@
 const makeCase = function (input, style) {
-    var casedWord = '';
+    var casedWord = input;
     var upperLower = '';
 
     if (typeof style == 'object'){
@@ -7,29 +7,27 @@ const makeCase = function (input, style) {
         style = style[1];
     } 
 
-    if (style == 'camel'){
+    if (style == 'camel' || style[1] == 'camel'){
         casedWord = camelCase(input);
-    } else if (style == 'pascal'){
+    } else if (style == 'pascal' || style[1] == 'pascal'){
         casedWord = pascalCase(input);
     
-    // } else if (style == 'snake'){
+    // } else if (style == 'snake' || style[1] == 'snake'){
     //     casedWord = snakeCase(input);
-    } else if (style == 'kebab'){
+    } else if (style == 'kebab' || style[1] == 'kebab'){
         casedWord = kebabCase(input);
-    } else if (style == 'title'){
+    } else if (style == 'title' || style[1] == 'title'){
         casedWord = titleCase(input);
-    } else if (style == 'vowel'){
+    } else if (style == 'vowel' || style[1] == 'vowel'){
         casedWord = vowelCase(input);
-    } else if (style == 'consonant'){
+    } else if (style == 'consonant' || style[1] == 'consonant'){
         casedWord = consonantCase(input);
     }
 
-    if (upperLower != ''){
-        if (upperLower == 'upper'){
-            casedWord = lowerCase(casedWord);
-        } else {
-            casedWord = upperCase(casedWord);
-        }
+    if (upperLower == 'upper'){
+        casedWord = upperCase(casedWord);
+    } else if (upperLower == 'lower'){
+        casedWord = lowerCase(casedWord);
     }
 
     return casedWord;
@@ -167,7 +165,7 @@ function lowerCase(input){
 // console.log(makeCase("this is a string", "kebab")); // => this-is-a-string
 // console.log(makeCase("this is a string", "title")); // => This Is A String
 // console.log(makeCase("this is a string", "vowel")); // => thIs Is A strIng
-// console.log(makeCase("this is a string", "consonant")); // => THiS iS a STRiNG
-console.log(makeCase("this is a string", ["upper", "snake"])); // => THIS_IS_A_STRING
+console.log(makeCase("this is a string", "consonant")); // => THiS iS a STRiNG
+console.log(makeCase("this is a string", ["upper", "kebab"])); // => THIS_IS_A_STRING
 
 
