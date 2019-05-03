@@ -11,9 +11,8 @@ const makeCase = function (input, style) {
         casedWord = camelCase(input);
     } else if (style == 'pascal' || style[1] == 'pascal'){
         casedWord = pascalCase(input);
-    
-    // } else if (style == 'snake' || style[1] == 'snake'){
-    //     casedWord = snakeCase(input);
+    } else if (style == 'snake' || style[1] == 'snake'){
+        casedWord = snakeCase(input);
     } else if (style == 'kebab' || style[1] == 'kebab'){
         casedWord = kebabCase(input);
     } else if (style == 'title' || style[1] == 'title'){
@@ -143,29 +142,29 @@ function lowerCase(input){
     return lowerCased;
 
 }
-// function is commented out because the underscore will not display. Still figuring it out.
-// function snakeCase(input) {
-//     var snakeCase = "";
 
-//     for (var i = 0; i < input.length; i += 1) {
-//         if (input[i - 1] == " ") {
-//             snakeCase += input[i] + "_";
-//         } else if (input[i] != " ") {
-//             snakeCase += input[i];
-//         }
-//     }
-//     return snakeCase;
-// }
+function snakeCase(input) {
+    var snakeCase = "";
+
+    for (var i = 0; i < input.length; i += 1) {
+        if (input[i] == " ") {
+            snakeCase += "_";
+        } else if (input[i] != " ") {
+            snakeCase += input[i];
+        }
+    }
+    return snakeCase;
+}
 
 
 
-// console.log(makeCase("this is a string", "camel")); // => thisIsAString
-// console.log(makeCase("this is a string", "pascal")); // => ThisIsAString
-// console.log(makeCase("this is a string", "snake")); // => this_is_a_string
-// console.log(makeCase("this is a string", "kebab")); // => this-is-a-string
-// console.log(makeCase("this is a string", "title")); // => This Is A String
-// console.log(makeCase("this is a string", "vowel")); // => thIs Is A strIng
+console.log(makeCase("this is a string", "camel")); // => thisIsAString
+console.log(makeCase("this is a string", "pascal")); // => ThisIsAString
+console.log(makeCase("this is a string", "snake")); // => this_is_a_string
+console.log(makeCase("this is a string", "kebab")); // => this-is-a-string
+console.log(makeCase("this is a string", "title")); // => This Is A String
+console.log(makeCase("this is a string", "vowel")); // => thIs Is A strIng
 console.log(makeCase("this is a string", "consonant")); // => THiS iS a STRiNG
-console.log(makeCase("this is a string", ["upper", "kebab"])); // => THIS_IS_A_STRING
+console.log(makeCase("this is a string", ["upper", "kebab"])); // => THIS-IS-A-STRING
 
 
