@@ -17,4 +17,10 @@ function createArray(size) {
     return arr;
 }
 
+
+// Takes in the positions of the white and black queen as arrays
+// Updates the board, so that these positions change to 1's
+function placeQueens(pos1, pos2) {
+
+}
 console.log(createArray(8, '0'));
