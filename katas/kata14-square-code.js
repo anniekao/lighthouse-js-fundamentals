@@ -1,11 +1,25 @@
 const squareCode = function (message) {
-    var rndSqRoot = Math.ceil(Math.sqrt(message.length));
     var messageNoSpaces = removeSpaces(message);
-    var codedArr = sqMessage(messageNoSpaces);
-    
+    var rndSqRoot = Math.ceil(Math.sqrt(messageNoSpaces.length));
+    var codedArr = sqMessage(messageNoSpaces, rndSqRoot);
+    var encodedMessage = '';
+    var j = 0;
+
+    while (j < rndSqRoot){
+        for (var i = 0; i < codedArr.length; i++){
+            if (codedArr[i][j] != undefined){
+                encodedMessage += codedArr[i][j];
+            }
+        }
+        j++;
+        encodedMessage += ' ';
+    }
+
+    return encodedMessage;
 };
 
-function sqMessage(message){
+
+function sqMessage(message, rndSqRoot){
     var codedResult = [];
 
     for (var i = 0; i < message.length; i += rndSqRoot) {
@@ -27,16 +41,7 @@ function removeSpaces(message){
     return noSpaces;
 }
 
-// function createColumns(message, rndSqRoot){
-//     var result = [];
-
-//     for (var i = 0; i < rndSqRoot; i++){
-//         result.push([]);
-//     }
-//     return result;
-// }
-
-console.log(squareCode("chill out"));
-// console.log(squareCode("feed the dog"));
-// console.log(squareCode("have a nice day"));
-// console.log(squareCode("if man was meant to stay on the ground god would have given us roots"));
+console.log(squareCode("chill out")); // => clu hlt io  
+console.log(squareCode("feed the dog")); // => fto ehg ee dd
+console.log(squareCode("have a nice day")); // => hae and via ecy
+console.log(squareCode("if man was meant to stay on the ground god would have given us roots")); // => imtgdvs fearwer mayoogo anouuio ntnnlvt wttddes aohghn sseoau
