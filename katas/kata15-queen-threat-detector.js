@@ -13,6 +13,7 @@ function createArray(size) {
             arr[i].push(0);
         }
     }
+
     return arr;
 }
 
