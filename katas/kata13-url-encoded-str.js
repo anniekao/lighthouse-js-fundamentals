@@ -10,31 +10,37 @@ const urlDecode = function (text) {
     return decoded;
 };
 
-// Take in an array of values and removes the space characters '%20' from each item, if present
+// Takes in an array of values and removes the space characters '%20' from each element, if present
 // Returns a new array of values without space characters
 function removeSpaces(arr){
     var noSpaces = [];
     var idxSpace = 0;
 
     for (var i = 0; i < arr.length; i++){
-        for (var j = 0; j < arr[i].length; j++){
-            if (j == arr[i].length - 1){
-                noSpaces[i] += " " + arr[i].slice(idxSpace, j + 1);
-            } else if (arr[i][j] == '%' && idxSpace == 0){
-                noSpaces[i] = arr[i].slice(0, j);
-                idxSpace = j + 3;
-            } else if (arr[i][j] == '%' && idxSpace > 0){
-                noSpaces[i] += " " + arr[i].slice(idxSpace, j);
-                idxSpace = j + 3;
+        if (arr[i].includes('%20')){
+            for (var j = 0; j < arr[i].length; j++) {
+                if (j == arr[i].length - 1) {
+                    noSpaces[i] += ' ' + arr[i].slice(idxSpace, j + 1);
+                } else if (arr[i][j] == '%' && idxSpace == 0) {
+                    noSpaces[i] = arr[i].slice(0, j);
+                    idxSpace = j + 3;
+                } else if (arr[i][j] == '%' && idxSpace > 0) {
+                    noSpaces[i] += ' ' + arr[i].slice(idxSpace, j);
+                    idxSpace = j + 3;
+                }
             }
+            idxSpace = 0;
+        } else {
+            noSpaces.push(arr[i]);
         }
-        idxSpace = 0;
+        
     }
     return noSpaces;
 }
 
 // console.log(removeSpaces(["Catch%20", "The%20", "Space%20"]));
 // console.log(removeSpaces(["Three%20Worded%20Test"]))
+// console.log(removeSpaces(["Vancouver"]));
 
 // Takes in a text and parses the values after the '=' and before the '&' characters starting at index 0
 // Returns an array containing these values
@@ -94,5 +100,5 @@ function parseKeys(text){
 
 // console.log(urlDecode("duck=rubber")); // {duck: "rubber"}
 // console.log(urlDecode("bootcamp=Lighthouse%20Labs")); // {bootcamp: "Lighthouse Labs"}
-console.log(urlDecode("city=Vancouver&weather=lots%20of%20rain")); // {city: "Vancouver", weather: "lots of rain"}
+// console.log(urlDecode("city=Vancouver&weather=lots%20of%20rain")); // {city: "Vancouver", weather: "lots of rain"}
 // console.log(urlDecode("city=Vancouver&weather=lots%20of%20rain").weather); // {"lots of rain"}
