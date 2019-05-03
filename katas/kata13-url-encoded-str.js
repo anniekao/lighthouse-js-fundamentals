@@ -19,22 +19,22 @@ function removeSpaces(arr){
     for (var i = 0; i < arr.length; i++){
         for (var j = 0; j < arr[i].length; j++){
             if (j == arr[i].length - 1){
-                noSpaces[i] = arr[i].slice(idxSpace, j + 1);
+                noSpaces[i] += " " + arr[i].slice(idxSpace, j + 1);
             } else if (arr[i][j] == '%' && idxSpace == 0){
-                noSpaces[i] = arr[i].slice(0,j);
+                noSpaces[i] = arr[i].slice(0, j);
+                idxSpace = j + 3;
             } else if (arr[i][j] == '%' && idxSpace > 0){
-                noSpaces[i] = " " + arr[i].slice(idxSpace,j);
+                noSpaces[i] += " " + arr[i].slice(idxSpace, j);
                 idxSpace = j + 3;
             }
-            console.log(idxSpace);
         }
         idxSpace = 0;
     }
     return noSpaces;
 }
 
-console.log(removeSpaces(["Catch%20", "The%20", "Space%20"]));
-console.log(removeSpaces(["Two%20Worded"]))
+// console.log(removeSpaces(["Catch%20", "The%20", "Space%20"]));
+// console.log(removeSpaces(["Three%20Worded%20Test"]))
 
 // Takes in a text and parses the values after the '=' and before the '&' characters starting at index 0
 // Returns an array containing these values
@@ -94,5 +94,5 @@ function parseKeys(text){
 
 // console.log(urlDecode("duck=rubber")); // {duck: "rubber"}
 // console.log(urlDecode("bootcamp=Lighthouse%20Labs")); // {bootcamp: "Lighthouse Labs"}
-// console.log(urlDecode("city=Vancouver&weather=lots%20of%20rain")); // {city: "Vancouver", weather: "lots of rain"}
+console.log(urlDecode("city=Vancouver&weather=lots%20of%20rain")); // {city: "Vancouver", weather: "lots of rain"}
 // console.log(urlDecode("city=Vancouver&weather=lots%20of%20rain").weather); // {"lots of rain"}
