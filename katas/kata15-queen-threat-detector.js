@@ -1,10 +1,10 @@
 const generateBoard = function(whiteQueen, blackqueen){
-    var board = createArray;
+    var board = createArray();
     var queensOnBoard = placeQueens(board, whiteQueen, blackqueen);
 
 
     console.log(queensOnBoard);
-    return threatDetector(queensOnBoard);
+    return threatDetector(queensOnBoard, whiteQueen, blackQueen);
 };
 
 // Takes in the size of the array/number of nested arrays. The default content of the nested arrays are 0s
@@ -39,24 +39,26 @@ function placeQueens(board, pos1, pos2) {
 
 // Takes in a 2D array that represents a board and checks if the two queens can attack each other
 // Returns a boolean
-function threatDetector(board){
+function threatDetector(board, whiteQueen, blackQueen){
+    var check;
     
-    // Checks horizontally for other queens
-    for (var i = 0; i < board.length; i++){
-        for (var j = 0; j < board.length; j++){
-            if (board[i][i] == board[i][j]){
-                return true;
-            }
-        }
-    } return false;
+    if (whiteQueen[0] == blackQueen[0]){
+        check = true;
+    } else if (whiteQueen[1] == blackQueen[1]){
+        check = true;
+    } else if (whiteQueen[0] - blackQueen[0] === whiteQueen[1] - blackQueen[1]){
+        check = true;
+    } else if (whiteQueen[0] - blackQueen[0] === -(whiteQueen[1] - blackQueen[1])) {
+        check = true;
+    } else {
+        check = false;
+    }
+
+    return check;
 }
 
-var whiteQueen = [5,5];
-var blackQueen = [5,7];
-var board = placeQueens(createArray(), whiteQueen, blackQueen);
+var whiteQueen = [0,5];
+var blackQueen = [5,0];
+console.log(generateBoard(whiteQueen, blackQueen));
 
-console.log(threatDetector(board));
 
-// var whiteQueen = [0,5];
-// var blackQueen = [5,0];
-// console.log(generateBoard(whiteQueen, blackQueen));
