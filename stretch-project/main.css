@@ -1,0 +1,9 @@
+.content { 
+        max-width: 500px;
+        margin: 0 auto;
+}
+
+#graph-title {
+    text-align: center;
+    padding: 50px;
+}
