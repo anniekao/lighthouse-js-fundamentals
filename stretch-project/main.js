@@ -15,7 +15,7 @@ function drawBar(num){
         document.getElementById('content').appendChild(empty);
 
         $('.graph-bar').animate({
-            width: '500px'
+            height: '100px'
         }, 1500);
     }
 }
@@ -24,4 +24,4 @@ function drawBarChart(data, options, element){
     
 }
 
-drawBar(3);
+drawBar(1);

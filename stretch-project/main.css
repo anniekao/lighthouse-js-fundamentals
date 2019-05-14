@@ -8,10 +8,14 @@
     padding: 50px;
 }
 
+#graph-body {
+    display: inline-block;
+}
+
 .graph-bar {
     background-color: red;
-    height: 20px;
-    width: 5px;
+    height: 5px;
+    width: 10px;
 }
 
 .empty-bar {
