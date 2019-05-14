@@ -1,9 +1,15 @@
-.content { 
-        max-width: 500px;
-        margin: 0 auto;
+#content { 
+    max-width: 500px;
+    margin: 0 auto;
 }
 
 #graph-title {
     text-align: center;
     padding: 50px;
+}
+
+.graph-bar {
+    background-color: red;
+    height: 20px;
+    width: 5px;
 }
