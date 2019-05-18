@@ -9,16 +9,8 @@
 }
 
 #graph-body {
-    display: inline-block;
+    height: 0px;
+    width: 0px;
 }
 
-.graph-bar {
-    background-color: red;
-    height: 5px;
-    width: 10px;
-}
 
-.empty-bar {
-    height: 20px;
-    width: 5px;
-}
