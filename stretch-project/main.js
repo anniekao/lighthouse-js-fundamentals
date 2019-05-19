@@ -43,15 +43,35 @@ function drawBars(data, element){
     for (i = 0; i < data.length; i++){
         var bar = document.getElementById('graph-body').children[i];
         var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        text.setAttributeNS(null, 'y', svg.getAttribute('height') - 2);
-        text.setAttributeNS(null, 'x', 45);
+        // text.setAttributeNS(null, 'y',bar.getAttribute('y'));
+        // text.setAttributeNS(null, 'x', 45);
         text.setAttributeNS(null, 'transform', bar.getAttribute('transform'));
         text.style.fill = 'red';
-        text.style.dominantBaseline = 'text-after-edge';
+        // text.style.dominantBaseline = 'text-before-edge';
         var label = document.createTextNode(dataSet[i]);
         text.appendChild(label);
 
         svg.appendChild(text);
+    }
+}
+
+// Given a string indicating a position of the text the function sets position of bar chart text. Default is 'text-before-edge'
+// known here as 'top'. Other options: bottom and center (still working on center).
+function setTextPos(pos = 'top') {
+    var svg = document.getElementById(element);
+
+    var barText = document.getElementsByTagName('text');
+
+    for (var i = 0; i < barText.length; i++) {
+        var bar = document.getElementById('graph-body').children[i];
+        if (pos == 'top') {
+            barText[i].setAttributeNS(null, 'x', 45);
+            barText[i].setAttributeNS(null, 'y', bar.getAttribute('y'));
+            barText[i].style.dominantBaseline = 'text-before-edge';
+        } else if (pos === 'bottom') {
+            barText[i].setAttributeNS(null, 'x', 45);
+            barText[i].setAttributeNS(null, 'y', svg.getAttribute('height') - 5);
+        }
     }
 }
 
@@ -64,6 +84,7 @@ var element = 'graph-body';
 
 graphTitle('Blah Blah Bar Graph', 'green', '40px');
 drawBarChart(dataSet, options, element);
+setTextPos('bottom');
 
 
 
