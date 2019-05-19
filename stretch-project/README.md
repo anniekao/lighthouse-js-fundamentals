@@ -10,9 +10,10 @@ the same effect (see link no. 1 in the resources section).
 
 # What I've Learned/Practiced By Doing This Project
 
-- SVG elements
+- SVG elements - they're automatically inline!
 - JavaScript: setting element attributes, style, appending elements
-- Jquery
+- Jquery syntax
+- CSS
 
 # Resources
 1) https://coursework.vschool.io/d3-building-a-bar-chart/
@@ -21,4 +22,4 @@ the same effect (see link no. 1 in the resources section).
 # To Dos
 - fix the css: 
     - center all elements
-    - fix the default colour of the bars and the text
+    - fix the default colour of the bars and the text aka make it 'prettier'
