@@ -43,8 +43,11 @@ function drawBars(data, element){
     for (i = 0; i < data.length; i++){
         var bar = document.getElementById('graph-body').children[i];
         var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.setAttributeNS(null, 'y', bar.getAttribute('y'));
+        text.setAttributeNS(null, 'x', 45);
         text.setAttributeNS(null, 'transform', bar.getAttribute('transform'));
         text.style.fill = 'red';
+        text.style.dominantBaseline = 'text-before-edge';
         var label = document.createTextNode(dataSet[i]);
         text.appendChild(label);
 
@@ -67,7 +70,7 @@ function setTextPos(pos = 'top') {
             barText[i].style.dominantBaseline = 'text-before-edge';
         } else if (pos === 'bottom') {
             barText[i].setAttributeNS(null, 'x', 45);
-            barText[i].setAttributeNS(null, 'y', svg.getAttribute('height') - 5);
+            barText[i].setAttributeNS(null, 'y', svg.getAttribute('height') - 20);
         } else if (pos === 'center') {
             barText[i].setAttributeNS(null, 'x', 50);
             barText[i].setAttributeNS(null, 'y', svg.getAttribute('height') - bar.getAttribute('height') / 2);
@@ -96,15 +99,23 @@ function changeTextColor(color){
     }
 }
 
+function changeSpacing(dataSet, padding) {
+    var svgWidth = document.getElementById('graph-body').getAttribute('width');
+    var bars = document.getElementsByTagName('rect');
+    var barWidth = svgWidth / dataSet.length;
+    for (var i = 0; i < bars.length; i++) {
+        bar[i].getAttribute('width', barWidth - padding);
+    }
+}
+
 var dataSet = [550, 100, 130, 50, 60, 280, 80];
 var options = {width: 800, height: 600};
 var element = 'graph-body';
 
 graphTitle('Blah Blah Bar Graph', 'green', '40px');
 drawBarChart(dataSet, options, element);
-setTextPos('top');
-changeAllBarColor('green', 'blue');
-changeTextColor('white');
+setTextPos('bottom');
+
 
 
 
