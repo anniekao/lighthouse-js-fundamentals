@@ -14,7 +14,7 @@ function drawBarChart(data, options, element) {
 
 // Set the width and height of the svg element
 function setSVGWidthHeight(width, height){
-    var svg = document.getElementById('graph-body');
+    var svg = document.getElementById(element);
     svg.setAttribute('width', width);
     svg.setAttribute('height', height);
 }
@@ -57,7 +57,7 @@ function drawBars(data, element){
 
 // Given a string indicating a position of the text the function sets position of bar chart text. Default is 'text-before-edge'
 // known here as 'top'. Other options: bottom and center.
-function setTextPos(pos = 'top') {
+function setTextPos(element, pos = 'top') {
     var svg = document.getElementById(element);
 
     var barText = document.getElementsByTagName('text');
@@ -99,12 +99,12 @@ function changeTextColor(color){
     }
 }
 
-function changeSpacing(dataSet, padding) {
-    var svgWidth = document.getElementById('graph-body').getAttribute('width');
+function changeSpacing(dataSet, padding, element) {
+    var svgWidth = document.getElementById(element).getAttribute('width');
     var bars = document.getElementsByTagName('rect');
     var barWidth = svgWidth / dataSet.length;
     for (var i = 0; i < bars.length; i++) {
-        bar[i].getAttribute('width', barWidth - padding);
+        bars[i].setAttributeNS(null, 'width', barWidth - padding);
     }
 }
 
@@ -114,7 +114,8 @@ var element = 'graph-body';
 
 graphTitle('Blah Blah Bar Graph', 'green', '40px');
 drawBarChart(dataSet, options, element);
-setTextPos('bottom');
+setTextPos(element, 'bottom');
+changeSpacing(dataSet, 15, element);
 
 
 
