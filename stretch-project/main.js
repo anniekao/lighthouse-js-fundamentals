@@ -43,11 +43,8 @@ function drawBars(data, element){
     for (i = 0; i < data.length; i++){
         var bar = document.getElementById('graph-body').children[i];
         var text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        // text.setAttributeNS(null, 'y',bar.getAttribute('y'));
-        // text.setAttributeNS(null, 'x', 45);
         text.setAttributeNS(null, 'transform', bar.getAttribute('transform'));
         text.style.fill = 'red';
-        // text.style.dominantBaseline = 'text-before-edge';
         var label = document.createTextNode(dataSet[i]);
         text.appendChild(label);
 
@@ -56,7 +53,7 @@ function drawBars(data, element){
 }
 
 // Given a string indicating a position of the text the function sets position of bar chart text. Default is 'text-before-edge'
-// known here as 'top'. Other options: bottom and center (still working on center).
+// known here as 'top'. Other options: bottom and center.
 function setTextPos(pos = 'top') {
     var svg = document.getElementById(element);
 
@@ -65,26 +62,37 @@ function setTextPos(pos = 'top') {
     for (var i = 0; i < barText.length; i++) {
         var bar = document.getElementById('graph-body').children[i];
         if (pos == 'top') {
-            barText[i].setAttributeNS(null, 'x', 45);
+            barText[i].setAttributeNS(null, 'x', 42);
             barText[i].setAttributeNS(null, 'y', bar.getAttribute('y'));
             barText[i].style.dominantBaseline = 'text-before-edge';
         } else if (pos === 'bottom') {
             barText[i].setAttributeNS(null, 'x', 45);
             barText[i].setAttributeNS(null, 'y', svg.getAttribute('height') - 5);
+        } else if (pos === 'center') {
+            barText[i].setAttributeNS(null, 'x', 50);
+            barText[i].setAttributeNS(null, 'y', svg.getAttribute('height') - bar.getAttribute('height') / 2);
+            barText[i].style.textAnchor = 'middle';
         }
     }
 }
 
+function changeBarColor(color, barNum){
+    var bar = document.getElementById('graph-body').children[barNum - 1];
+    bar.style.fill = color;
+}
 
 
 
-var dataSet = [20, 30, 40, 50, 60, 120, 80];
-var options = {width: 800, height: 300};
+var dataSet = [550, 100, 130, 50, 60, 280, 80];
+var options = {width: 800, height: 600};
 var element = 'graph-body';
 
 graphTitle('Blah Blah Bar Graph', 'green', '40px');
 drawBarChart(dataSet, options, element);
-setTextPos('bottom');
+setTextPos('top');
+changeBarColor('green', 3);
+
+
 
 
 
