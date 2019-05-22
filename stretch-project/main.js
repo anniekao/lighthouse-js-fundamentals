@@ -81,13 +81,20 @@ function changeBarColor(color, barNum){
     bar.style.fill = color;
 }
 
-function changeAllBarColor(color){
+function changeAllBarColor(fillColor, strokeColor = 'black'){
     var bars = document.getElementsByTagName('rect');
     for (var i = 0; i < bars.length; i++){
-        bars[i].style.fill = color;
+        bars[i].style.fill = fillColor;
+        bars[i].style.stroke = strokeColor;
     }
 }
 
+function changeTextColor(color){
+    var allText = document.getElementsByTagName('text');
+    for (var i = 0; i < allText.length; i++){
+        allText[i].style.fill = color;
+    }
+}
 
 var dataSet = [550, 100, 130, 50, 60, 280, 80];
 var options = {width: 800, height: 600};
@@ -96,7 +103,8 @@ var element = 'graph-body';
 graphTitle('Blah Blah Bar Graph', 'green', '40px');
 drawBarChart(dataSet, options, element);
 setTextPos('top');
-changeAllBarColor('green');
+changeAllBarColor('green', 'blue');
+changeTextColor('white');
 
 
 
