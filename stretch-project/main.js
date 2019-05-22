@@ -5,18 +5,23 @@ function graphTitle(title, color = 'black', size = '50px'){
     $('#graph-title').css('font-size', size);
 }
 
-// Given an array of data, an object containing the width and height of the chart and the element where the chart appears
-// a bar chart is created.
+// Given an array of data, an object containing formatting options, e.g. width and height of the chart,
+// and an element on the page, a bar chart is created 
 function drawBarChart(data, options, element) {
     setSVGWidthHeight(options.width, options.height);
     drawBars(data, element);
+    changeAllBarColor(options.barColor);
+    changeTextColor(options.labelColor);
+    setTextPos(element, options.textPos);
 }
 
 // Set the width and height of the svg element
 function setSVGWidthHeight(width, height){
     var svg = document.getElementById(element);
-    svg.setAttribute('width', width);
-    svg.setAttribute('height', height);
+    svg.setAttributeNS(null, 'width', width);
+    svg.setAttributeNS(null, 'height', height);
+    svg.style.borderLeft = 'solid 2px black';
+    svg.style.borderBottom = 'solid 2px black';
 }
 
 function drawBars(data, element){
@@ -31,8 +36,6 @@ function drawBars(data, element){
         rect.setAttribute('y', height - data[i]);
         rect.setAttribute('height', data[i]);
         rect.setAttribute('width', barWidth - barPadding);
-        rect.style.stroke = 'black';
-        rect.style.strokeWidth = '2';
         rect.style.fill = 'white';
         var translate = [barWidth * i, 0];
         rect.setAttribute('transform', "translate(" + translate + ")");
@@ -63,7 +66,7 @@ function setTextPos(element, pos = 'top') {
     var barText = document.getElementsByTagName('text');
 
     for (var i = 0; i < barText.length; i++) {
-        var bar = document.getElementById('graph-body').children[i];
+        var bar = document.getElementById(element).children[i];
         if (pos == 'top') {
             barText[i].setAttributeNS(null, 'x', 42);
             barText[i].setAttributeNS(null, 'y', bar.getAttribute('y'));
@@ -84,11 +87,10 @@ function changeBarColor(color, barNum){
     bar.style.fill = color;
 }
 
-function changeAllBarColor(fillColor, strokeColor = 'black'){
+function changeAllBarColor(fillColor){
     var bars = document.getElementsByTagName('rect');
     for (var i = 0; i < bars.length; i++){
         bars[i].style.fill = fillColor;
-        bars[i].style.stroke = strokeColor;
     }
 }
 
@@ -109,13 +111,18 @@ function changeSpacing(dataSet, padding, element) {
 }
 
 var dataSet = [550, 100, 130, 50, 60, 280, 80];
-var options = {width: 800, height: 600};
+var options = {
+    width: 800,
+    height: 600,
+    textPos: 'bottom',
+    barColor: '#dc0073',
+    labelColor: 'white'
+};
 var element = 'graph-body';
 
 graphTitle('Blah Blah Bar Graph', 'green', '40px');
 drawBarChart(dataSet, options, element);
-setTextPos(element, 'bottom');
-changeSpacing(dataSet, 15, element);
+
 
 
 
