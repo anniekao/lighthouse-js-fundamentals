@@ -4,7 +4,7 @@ function whichSchool(age){
     } else if (age <= 18 && age >= 13){
         return "Secondary School";
     } else {
-        return "Lighhouse Labs";
+        return "Lighthouse Labs";
     }
 }
 
