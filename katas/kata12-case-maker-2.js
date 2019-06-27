@@ -157,14 +157,3 @@ function snakeCase(input) {
 }
 
 
-
-console.log(makeCase("this is a string", "camel")); // => thisIsAString
-console.log(makeCase("this is a string", "pascal")); // => ThisIsAString
-console.log(makeCase("this is a string", "snake")); // => this_is_a_string
-console.log(makeCase("this is a string", "kebab")); // => this-is-a-string
-console.log(makeCase("this is a string", "title")); // => This Is A String
-console.log(makeCase("this is a string", "vowel")); // => thIs Is A strIng
-console.log(makeCase("this is a string", "consonant")); // => THiS iS a STRiNG
-console.log(makeCase("this is a string", ["upper", "kebab"])); // => THIS-IS-A-STRING
-
-
