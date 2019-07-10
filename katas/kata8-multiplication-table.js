@@ -1,17 +1,18 @@
-const multiplicationTable = function (maxValue) {
+const multiplicationTable = (maxValue) => {
     var rowArray = [];
     var rowCount = 1;
     var n = 0;
+    var output = "";
     while (n < maxValue){
         for (var i = 0; i < maxValue * rowCount; i += rowCount) {
             rowArray.push(i + rowCount);
         }
-        console.log(rowArray.join(' '));
+        output += rowArray.join(' ') + "\n";
         rowArray = [];
-        rowCount += 1
+        rowCount += 1;
         n += 1;
     } 
-    
+    return output;
 };
 
 console.log(multiplicationTable(1));

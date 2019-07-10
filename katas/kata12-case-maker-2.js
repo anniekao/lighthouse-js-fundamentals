@@ -1,159 +1,99 @@
 const makeCase = function (input, style) {
-    var casedWord = input;
-    var upperLower = '';
+    let output = input;
+    let upperLower = '';
 
-    if (typeof style == 'object'){
+    if (typeof style === 'object'){
         upperLower = style[0];
         style = style[1];
     } 
-
-    if (style == 'camel' || style[1] == 'camel'){
-        casedWord = camelCase(input);
-    } else if (style == 'pascal' || style[1] == 'pascal'){
-        casedWord = pascalCase(input);
-    } else if (style == 'snake' || style[1] == 'snake'){
-        casedWord = snakeCase(input);
-    } else if (style == 'kebab' || style[1] == 'kebab'){
-        casedWord = kebabCase(input);
-    } else if (style == 'title' || style[1] == 'title'){
-        casedWord = titleCase(input);
-    } else if (style == 'vowel' || style[1] == 'vowel'){
-        casedWord = vowelCase(input);
-    } else if (style == 'consonant' || style[1] == 'consonant'){
-        casedWord = consonantCase(input);
+    switch (style){
+        case 'camel':
+        case 'pascal':
+        case 'title':
+        case 'kebab':
+        case 'snake':
+            output = styles(input, style);
+            break;
+        case 'vowel':
+        case 'consonant':
+            output = vowelsConsonants(input, style);
+            break;
     }
 
-    if (upperLower == 'upper'){
-        casedWord = upperCase(casedWord);
-    } else if (upperLower == 'lower'){
-        casedWord = lowerCase(casedWord);
+    if (upperLower === 'upper'){
+        return makeUpperLowerCase(output, upperLower);
+    } else if (upperLower === 'lower'){
+        return makeUpperLowerCase(output, upperLower);
+    } else {
+        return output;
     }
-
-    return casedWord;
 };
 
-function camelCase(input){
-    var camelCase = '';
+function styles(input, style){
+    var output = '';
 
     for (var i = 0; i < input.length; i += 1) {
-        if (input[i - 1] == " ") {
-            camelCase += input[i].toUpperCase();
-        } else if (input[i] != " ") {
-            camelCase += input[i];
-        }
-    }
-    return camelCase;
-}
-
-function pascalCase(input) {
-    var pascalCase = '';
-
-    for (var i = 0; i < input.length; i += 1) {
-        if (input[i - 1] == " " || i == 0) {
-            pascalCase += input[i].toUpperCase();
-        } else if (input[i] != " ") {
-            pascalCase += input[i];
-        }
-    }
-    return pascalCase;
-}
-
-function kebabCase(input) {
-    var kebabCase = '';
-
-    for (var i = 0; i < input.length; i += 1) {
-        if (input[i + 1] == " ") {
-            kebabCase += input[i] + "-";
-        } else if (input[i] != " ") {
-            kebabCase += input[i];
-        }
-    }
-    return kebabCase;
-}
-
-function titleCase(input){
-    var titleCase = '';
-
-    for (var i = 0; i < input.length; i += 1) {
-        if (input[i - 1] == " " || i == 0) {
-            titleCase += input[i].toUpperCase();
+        if (input[i + 1] === " " && style === 'kebab'){
+            output += input[i] + "-";
+        } else if (input[i - 1] === " " && style === 'camel') {
+            output += input[i].toUpperCase();
+        } else if (input[i - 1] === " " || i == 0){
+            if (style === 'pascal' || style === 'title') {
+            output += input[i].toUpperCase();
+            } else {
+                output += input[i];
+            }
+        } else if (input[i] === " ") {
+            if (style === 'title'){
+                output += input[i];
+            } else if (style === 'snake'){
+                output += "_";
+            }
         } else {
-            titleCase += input[i];
+            output += input[i];
         }
     }
-    return titleCase;
+    return output;
 }
 
-function vowelCase(input){
+function vowelsConsonants(input, style){
     const VOWELS = ['a', 'e', 'i', 'o', 'u'];
-    var vowelCase = '';
+    let output = "";
 
-    for (var i = 0; i < input.length; i+= 1){
-        if (VOWELS.includes(input[i].toLowerCase())){
-            vowelCase += input[i].toUpperCase();
+    for (let i = 0; i < input.length; i+= 1){
+        if (VOWELS.includes(input[i].toLowerCase()) && style === 'vowel'){
+            output += input[i].toUpperCase();
+        } else if (!VOWELS.includes(input[i].toLowerCase()) && style === 'consonant') {
+            output += input[i].toUpperCase();
         } else {
-            vowelCase += input[i];
+            output += input[i];
         }
     }
-
-    return vowelCase;
+    return output;
 }
 
-function consonantCase(input) {
-    const VOWELS = ['a', 'e', 'i', 'o', 'u'];
-    var consonantCase = '';
+function makeUpperLowerCase(input, style){
+    let output = "";
 
-    for (var i = 0; i < input.length; i += 1) {
-        if (!VOWELS.includes(input[i].toLowerCase())) {
-            consonantCase += input[i].toUpperCase();
+    for (let i = 0; i < input.length; i++) {
+        if (input[i] != " " && style === 'lower') {
+            output += input[i].toLowerCase();
+        } else if (input[i] != " " && style === 'upper') {
+             output += input[i].toUpperCase();
         } else {
-            consonantCase += input[i];
+            output += input[i];
         }
     }
-
-    return consonantCase;
-}
-
-function upperCase(input){
-    var upperCased = "";
-
-    for (var i = 0; i < input.length; i++){
-        if (input[i] != " "){
-            upperCased += input[i].toUpperCase();
-        } else {
-            upperCased += input[i];
-        }
-    }
-    
-    return upperCased;
-}
-
-function lowerCase(input){
-    var lowerCased = "";
-
-    for (var i = 0; i < input.length; i++) {
-        if (input[i] != " ") {
-            lowerCased += input[i].toLowerCase();
-        } else {
-            lowerCased += input[i];
-        }
-    }
-
-    return lowerCased;
-
-}
-
-function snakeCase(input) {
-    var snakeCase = "";
-
-    for (var i = 0; i < input.length; i += 1) {
-        if (input[i] == " ") {
-            snakeCase += "_";
-        } else if (input[i] != " ") {
-            snakeCase += input[i];
-        }
-    }
-    return snakeCase;
+    return output;
 }
 
 
+
+
+console.log(makeCase("this is a string", "camel"));
+console.log(makeCase("this is a string", "pascal"));
+console.log(makeCase("this is a string", "title"));
+console.log(makeCase("this is a string", "vowel"));
+console.log(makeCase("this is a string", "consonant"));
+// console.log(makeCase("this is a string", "snake"));
+console.log(makeCase("THIS IS A STRING", ["lower", "kebab"]));

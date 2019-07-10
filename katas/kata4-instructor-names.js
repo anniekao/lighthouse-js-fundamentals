@@ -1,4 +1,4 @@
-const instructorWithLongestName = function (instructors) {
+const instructorWithLongestName = (instructors) => {
     var longestName = "";
     var result;
     
@@ -9,7 +9,7 @@ const instructorWithLongestName = function (instructors) {
             result = instructors[i];
         } else if (instructors[j].name.length > instructors[i].name.length && instructors[j].name.length > longestName.length) {
             longestName = instructors[j].name;
-            result = instructors[j]
+            result = instructors[j];
         }
     }
     return result;

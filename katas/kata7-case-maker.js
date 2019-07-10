@@ -1,4 +1,4 @@
-let camelCase = function (input) {
+const camelCase = (input) => {
     var camelCased = "";
 
     for (var i = 0; i < input.length; i += 1){

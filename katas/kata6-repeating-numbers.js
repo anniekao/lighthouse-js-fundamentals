@@ -1,4 +1,4 @@
-let repeatNumbers = function (data) {
+let repeatNumbers = (data) => {
     var repeatStr = "";
     for (var i = 0; i < data.length; i++){
         var toStr = data[i][0].toString();

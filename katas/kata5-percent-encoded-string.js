@@ -1,4 +1,4 @@
-const urlEncode = function (text) {
+const urlEncode = (text) => {
     var encodedStr = "";
 
     for (var i = 0; i < text.length; i ++){
