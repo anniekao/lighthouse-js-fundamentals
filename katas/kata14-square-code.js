@@ -1,5 +1,5 @@
 const squareCode = function (message) {
-    var messageNoSpaces = removeSpaces(message);
+    var messageNoSpaces = message.replace(/\s/g, '');
     var rndSqRoot = Math.ceil(Math.sqrt(messageNoSpaces.length));
     var codedArr = sqMessage(messageNoSpaces, rndSqRoot);
     var encodedMessage = '';
@@ -29,17 +29,6 @@ function sqMessage(message, rndSqRoot){
     return codedResult;
 }
 
-function removeSpaces(message){
-    var noSpaces = '';
-
-    for (var i = 0; i < message.length; i++){
-        if (message[i] != ' '){
-            noSpaces += message[i];
-        }
-    }
-
-    return noSpaces;
-}
 
 console.log(squareCode("chill out")); // => clu hlt io  
 console.log(squareCode("feed the dog")); // => fto ehg ee dd

@@ -57,8 +57,8 @@ function threatDetector(board, whiteQueen, blackQueen){
     return check;
 }
 
-var whiteQueen = [0,5];
-var blackQueen = [5,0];
+var whiteQueen = [0,0];
+var blackQueen = [7,7];
 console.log(generateBoard(whiteQueen, blackQueen));
 
 
